@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Task Analyzer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <h1>🧠 Smart Task Analyzer</h1>
+    <p>Quickly prioritize your tasks based on urgency, importance, and effort.</p>
+</header>
+
+<main class="container">
+
+    <!-- Input Panel -->
+    <section class="input-section">
+        <h2>Enter Tasks (JSON)</h2>
+        <textarea id="taskInput" placeholder='[{"title":"Task A","due_date":"2025-12-01","importance":8,"estimated_hours":3}]'></textarea>
+        <button onclick="analyzeTasks()">Analyze Tasks</button>
+    </section>
+
+    <!-- Results Panel -->
+    <section class="results-section">
+        <h2>Top 3 Tasks 🔥</h2>
+        <div id="topTasks">
+            <p class="placeholder">Top tasks will appear here after clicking Analyze.</p>
+        </div>
+        <h2>All Tasks</h2>
+        <div id="results">
+            <p class="placeholder">All tasks will appear here after clicking Analyze.</p>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>Smart Task Analyzer &copy; 2025 | Built with Django & JS</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

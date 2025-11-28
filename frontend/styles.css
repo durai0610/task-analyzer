@@ -1,0 +1,123 @@
+/* Reset and body */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f2f5;
+    color: #333;
+    line-height: 1.5;
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 30px 20px;
+    background: #1e90ff;
+    color: white;
+}
+header h1 { font-size: 2.2em; margin-bottom: 5px; }
+header p { font-size: 1em; opacity: 0.9; }
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 15px;
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 20px;
+}
+
+/* Main container */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+
+/* Input Section */
+.input-section {
+    flex: 1;
+    min-width: 300px;
+    max-width: 450px;
+}
+textarea {
+    width: 100%;
+    height: 220px;
+    padding: 15px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    resize: vertical;
+}
+button {
+    margin-top: 15px;
+    padding: 12px 20px;
+    width: 100%;
+    background: #1e90ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+button:hover { background: #0056b3; }
+
+/* Results Section */
+.results-section {
+    flex: 2;
+    min-width: 300px;
+    max-width: 700px;
+}
+.results-section h2 { margin-bottom: 15px; }
+
+/* Task Cards */
+.task-card {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.task-card:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.2); }
+
+/* Task Info */
+.task-info {
+    flex: 1;
+    min-width: 180px;
+}
+.task-info h3 { font-size: 1.2em; margin-bottom: 5px; }
+.task-info p { font-size: 0.9em; margin-bottom: 3px; }
+
+/* Priority Color Bar */
+.priority {
+    width: 10px;
+    border-radius: 8px;
+}
+.low { background-color: #28a745; }       /* Green */
+.medium { background-color: #ffc107; }    /* Yellow */
+.high { background-color: #dc3545; }      /* Red */
+
+/* Highlight Top 3 Tasks */
+#topTasks .task-card {
+    border: 2px solid #ffbf00;  /* Gold border for top 3 */
+}
+
+/* Placeholder Text */
+.placeholder {
+    color: #888;
+    font-style: italic;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container { flex-direction: column; align-items: center; }
+    .task-card { flex-direction: column; }
+}
