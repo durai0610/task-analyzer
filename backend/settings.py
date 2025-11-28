@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-k#l=%&s5l8r601ejmqnzd1y_q7t+(ais6(eo7p@rf1bvm8nggh
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "https://task-analyzer-backend.onrender.com",
+    "task-analyzer-backend.onrender.com",
     "localhost",
     "127.0.0.1"
 ]
