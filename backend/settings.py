@@ -25,12 +25,17 @@ SECRET_KEY = 'django-insecure-k#l=%&s5l8r601ejmqnzd1y_q7t+(ais6(eo7p@rf1bvm8nggh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "https://task-analyzer-backend.onrender.com",
+    "localhost",
+    "127.0.0.1"
+]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
