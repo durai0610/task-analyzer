@@ -2,39 +2,58 @@ from datetime import date
 
 def calculate_task_score(task_data):
     """
-    Calculate a priority score for each task.
+    Calculates a priority score.
     Higher score = higher priority.
+    Uses:
+      - Urgency (due_date vs today)
+      - Importance (1–10)
+      - Effort (estimated_hours)
+      - Dependencies
     """
-
     score = 0
     today = date.today()
 
-    # ----- 1. Urgency -----
-    due_date = task_data.get("due_date")
+    # ---- 1. Urgency ----
+    due_date = task_data.get('due_date', today)
     if isinstance(due_date, str):
-        due_date = date.fromisoformat(due_date)
+        # if still string, just treat as today
+        due_date = today
 
-    days_left = (due_date - today).days
+    days_until_due = (due_date - today).days
 
-    if days_left < 0:
-        score += 100          # Overdue
-    elif days_left <= 3:
-        score += 50           # Due soon
-    else:
-        score += max(0, 20 - days_left)  # Gradual urgency
+    if days_until_due < 0:
+        score += 100  # overdue
+    elif days_until_due <= 3:
+        score += 50   # due very soon
 
-    # ----- 2. Importance -----
-    importance = task_data.get("importance", 5)
+    # ---- 2. Importance (1–10) ----
+    importance = task_data.get('importance', 5)
+    try:
+        importance = int(importance)
+    except (ValueError, TypeError):
+        importance = 5
+
+    # Clamp between 1 and 10
+    importance = max(1, min(importance, 10))
     score += importance * 5
 
-    # ----- 3. Effort Bonus -----
-    hours = task_data.get("estimated_hours", 1)
-    if hours < 2:
-        score += 10  # quick task bonus
+    # ---- 3. Effort (quick wins) ----
+    hours = task_data.get('estimated_hours', 1)
+    try:
+        hours = float(hours)
+    except (ValueError, TypeError):
+        hours = 1.0
 
-    # ----- 4. Dependencies -----
-    deps = task_data.get("dependencies", [])
-    if deps:
-        score -= len(deps) * 5  # more dependencies = slightly lower priority
+    if hours < 2:
+        score += 10  # quick win
+    elif hours > 8:
+        score -= 5   # very big task, slightly lower
+
+    # ---- 4. Dependencies ----
+    deps = task_data.get('dependencies', [])
+    if not isinstance(deps, list):
+        deps = []
+    # Each dependency slightly reduces score
+    score -= 5 * len(deps)
 
     return score

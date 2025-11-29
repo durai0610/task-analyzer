@@ -144,5 +144,8 @@ Open ```frontend/index.html``` in Live Server (recommended) to use the UI.
 ### 🔹 Frontend — Before Analysis
 ![Frontend Before](./screenshots/frontend_before.png)
 
-### 🔹 Frontend — After Analysis
-![Frontend After](./screenshots/frontend_after.png)
+### 🔹 Frontend — After-page_1 Analysis
+![Frontend After](./screenshots/frontend_after-1.png)
+
+### 🔹 Frontend — After-page_2 Analysis
+![Frontend After](./screenshots/frontend_after-2.png)

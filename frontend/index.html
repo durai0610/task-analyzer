@@ -9,7 +9,7 @@
 
 <header>
     <h1>🧠 Smart Task Analyzer</h1>
-    <p>Quickly prioritize your tasks based on urgency, importance, and effort.</p>
+    <p>Quickly prioritize your tasks based on urgency, importance, effort, and dependencies.</p>
 </header>
 
 <main class="container">
@@ -17,8 +17,24 @@
     <!-- Input Panel -->
     <section class="input-section">
         <h2>Enter Tasks (JSON)</h2>
-        <textarea id="taskInput" placeholder='[{"title":"Task A","due_date":"2025-12-01","importance":8,"estimated_hours":3}]'></textarea>
+        <textarea id="taskInput" placeholder='[
+  {
+    "title": "Finish Django Assignment",
+    "due_date": "2025-11-30",
+    "importance": 9,
+    "estimated_hours": 4,
+    "dependencies": []
+  },
+  {
+    "title": "Fix Critical Bug",
+    "due_date": "2025-11-28",
+    "importance": 10,
+    "estimated_hours": 2,
+    "dependencies": [1]
+  }
+]'></textarea>
         <button onclick="analyzeTasks()">Analyze Tasks</button>
+        <button class="secondary" onclick="loadExample()">Load Example Data</button>
     </section>
 
     <!-- Results Panel -->
@@ -36,7 +52,7 @@
 </main>
 
 <footer>
-    <p>Smart Task Analyzer &copy; 2025 | Built with Django & JS</p>
+    <p>Smart Task Analyzer &copy; 2025 | Built with Django &amp; Vanilla JS</p>
 </footer>
 
 <script src="script.js"></script>
