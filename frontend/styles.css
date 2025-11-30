@@ -1,4 +1,4 @@
-/* Reset and base */
+/* Reset & Base */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -6,7 +6,7 @@
 }
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f0f2f5;
+    background: #f0f4f8;
     color: #333;
     line-height: 1.5;
 }
@@ -15,8 +15,9 @@ body {
 header {
     text-align: center;
     padding: 30px 20px;
-    background: #1e90ff;
+    background: linear-gradient(90deg,#4e73df,#1cc88a);
     color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 header h1 {
     font-size: 2.2em;
@@ -39,17 +40,20 @@ footer {
 /* Layout */
 .container {
     display: flex;
-    flex-wrap: wrap;
     gap: 20px;
     padding: 20px;
     justify-content: center;
+    align-items: flex-start;
 }
 
-/* Input section */
+/* Input Section */
 .input-section {
     flex: 1;
-    min-width: 300px;
     max-width: 450px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 .input-section h2 {
     margin-bottom: 10px;
@@ -68,7 +72,7 @@ button {
     margin-top: 10px;
     padding: 12px 20px;
     width: 100%;
-    background: #1e90ff;
+    background: #1cc88a;
     color: white;
     border: none;
     border-radius: 8px;
@@ -77,25 +81,44 @@ button {
     transition: 0.3s;
 }
 button:hover {
-    background: #0056b3;
+    background: #17a673;
 }
 button.secondary {
     background: #ffffff;
-    color: #1e90ff;
-    border: 1px solid #1e90ff;
+    color: #1cc88a;
+    border: 1px solid #1cc88a;
 }
 button.secondary:hover {
-    background: #e6f2ff;
+    background: #e6fef7;
 }
 
-/* Results section */
+/* Results Section */
 .results-section {
     flex: 2;
-    min-width: 300px;
     max-width: 700px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 .results-section h2 {
     margin-bottom: 10px;
+}
+
+/* Spinner */
+.spinner {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #1cc88a;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 10px auto;
+    display: none;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* Placeholder */
@@ -106,24 +129,24 @@ button.secondary:hover {
     padding: 20px 0;
 }
 
-/* Task cards */
+/* Task Cards */
 .task-card {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    background: white;
+    background: #f8f9fc;
     padding: 15px;
     margin-bottom: 15px;
     border-radius: 10px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
     transition: transform 0.2s, box-shadow 0.2s;
 }
 .task-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
 
-/* Task info */
+/* Task Info */
 .task-info {
     flex: 1;
     min-width: 180px;
@@ -131,37 +154,41 @@ button.secondary:hover {
 .task-info h3 {
     font-size: 1.2em;
     margin-bottom: 5px;
+    color: #4e73df;
 }
 .task-info p {
     font-size: 0.9em;
     margin-bottom: 3px;
 }
 
-/* Priority bar */
+/* Priority Bar */
 .priority {
-    width: 10px;
+    width: 12px;
     border-radius: 8px;
 }
 .low {
-    background-color: #28a745;   /* Green */
+    background-color: #1cc88a;
 }
 .medium {
-    background-color: #ffc107;   /* Yellow */
+    background-color: #f6c23e;
 }
 .high {
-    background-color: #dc3545;   /* Red */
+    background-color: #e74a3b;
 }
 
-/* Highlight top 3 */
+/* Highlight Top 3 */
 #topTasks .task-card {
-    border: 2px solid #ffbf00; /* gold border */
+    border: 2px solid #f6c23e;
 }
 
-/* Responsive */
+/* Responsive: Mobile */
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
+    }
+    .input-section, .results-section {
+        max-width: 100%;
     }
     .task-card {
         flex-direction: column;

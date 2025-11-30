@@ -17,22 +17,7 @@
     <!-- Input Panel -->
     <section class="input-section">
         <h2>Enter Tasks (JSON)</h2>
-        <textarea id="taskInput" placeholder='[
-  {
-    "title": "Finish Django Assignment",
-    "due_date": "2025-11-30",
-    "importance": 9,
-    "estimated_hours": 4,
-    "dependencies": []
-  },
-  {
-    "title": "Fix Critical Bug",
-    "due_date": "2025-11-28",
-    "importance": 10,
-    "estimated_hours": 2,
-    "dependencies": [1]
-  }
-]'></textarea>
+        <textarea id="taskInput" placeholder='[{"title": "Finish Django Assignment","due_date": "2025-11-30","importance": 9,"estimated_hours": 4,"dependencies": []}]'></textarea>
         <button onclick="analyzeTasks()">Analyze Tasks</button>
         <button class="secondary" onclick="loadExample()">Load Example Data</button>
     </section>
@@ -43,7 +28,9 @@
         <div id="topTasks">
             <p class="placeholder">Top tasks will appear here after clicking Analyze.</p>
         </div>
+
         <h2>All Tasks</h2>
+        <div id="spinner" class="spinner"></div>
         <div id="results">
             <p class="placeholder">All tasks will appear here after clicking Analyze.</p>
         </div>
@@ -52,7 +39,7 @@
 </main>
 
 <footer>
-    <p>Smart Task Analyzer &copy; 2025 | Built with Django &amp; Vanilla JS</p>
+    <p>Smart Task Analyzer &copy; 2025 | Built with Django & Vanilla JS</p>
 </footer>
 
 <script src="script.js"></script>

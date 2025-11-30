@@ -2,13 +2,21 @@ const API_BASE = window.location.hostname === "localhost"
   ? "http://127.0.0.1:8000"
   : "https://task-analyzer-backend.onrender.com";
 
-async function analyzeTasks() {
-    const text = document.getElementById("taskInput").value;
+const spinner = document.getElementById("spinner");
 
+function showSpinner(show) {
+    spinner.style.display = show ? "block" : "none";
+}
+
+async function analyzeTasks() {
+    showSpinner(true);
+    const text = document.getElementById("taskInput").value;
     let tasks;
+
     try {
         tasks = JSON.parse(text);
     } catch (err) {
+        showSpinner(false);
         alert("Invalid JSON. Please check your input.");
         return;
     }
@@ -24,6 +32,7 @@ async function analyzeTasks() {
             const errorText = await response.text();
             console.error("Backend error:", errorText);
             alert("Backend error. Check console/logs.");
+            showSpinner(false);
             return;
         }
 
@@ -32,6 +41,8 @@ async function analyzeTasks() {
     } catch (err) {
         console.error(err);
         alert("Network error. Check API_BASE URL or server.");
+    } finally {
+        showSpinner(false);
     }
 }
 
