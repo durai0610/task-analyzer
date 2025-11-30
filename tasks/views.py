@@ -84,7 +84,7 @@ def suggest_tasks(request):
     """
     GET /api/tasks/suggest/
     Returns top 3 tasks (from DB) for today or earlier,
-    with scores.
+    with scores. If DB has none, returns default example tasks.
     """
     if request.method != "GET":
         return JsonResponse({"error": "Invalid request method. Use GET."}, status=405)
@@ -93,28 +93,59 @@ def suggest_tasks(request):
     tasks = Task.objects.filter(due_date__lte=today)
 
     scored = []
-    for t in tasks:
-        task_data = {
-            "title": t.title,
-            "due_date": t.due_date,
-            "importance": t.importance,
-            "estimated_hours": t.estimated_hours,
-            "dependencies": t.dependencies or [],
-        }
-        score = calculate_task_score(task_data)
-        scored.append((score, t))
 
+    if tasks.exists():
+        for t in tasks:
+            task_data = {
+                "title": t.title,
+                "due_date": t.due_date,
+                "importance": t.importance,
+                "estimated_hours": t.estimated_hours,
+                "dependencies": t.dependencies or [],
+            }
+            score = calculate_task_score(task_data)
+            scored.append((score, t))
+    else:
+        # Default example tasks if DB is empty
+        default_tasks = [
+            {
+                "title": "Finish Django Assignment",
+                "due_date": today,
+                "importance": 9,
+                "estimated_hours": 4,
+                "dependencies": [],
+            },
+            {
+                "title": "Fix Critical Bug",
+                "due_date": today,
+                "importance": 10,
+                "estimated_hours": 2,
+                "dependencies": [],
+            },
+            {
+                "title": "Prepare Presentation",
+                "due_date": today,
+                "importance": 7,
+                "estimated_hours": 3,
+                "dependencies": [],
+            },
+        ]
+        for t in default_tasks:
+            score = calculate_task_score(t)
+            scored.append((score, t))
+
+    # Sort by score descending and get top 3
     scored.sort(key=lambda x: x[0], reverse=True)
     top3 = scored[:3]
 
     response = []
     for score, t in top3:
         response.append({
-            "title": t.title,
-            "due_date": t.due_date.isoformat(),
-            "importance": t.importance,
-            "estimated_hours": t.estimated_hours,
-            "dependencies": t.dependencies or [],
+            "title": t["title"] if isinstance(t, dict) else t.title,
+            "due_date": (t["due_date"] if isinstance(t, dict) else t.due_date).isoformat() if isinstance(t, dict) else t.due_date.isoformat(),
+            "importance": t["importance"] if isinstance(t, dict) else t.importance,
+            "estimated_hours": t["estimated_hours"] if isinstance(t, dict) else t.estimated_hours,
+            "dependencies": t["dependencies"] if isinstance(t, dict) else (t.dependencies or []),
             "score": score,
             "reason": "High priority based on urgency, importance and effort.",
         })
